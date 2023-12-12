@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <div class="search">
+        <input type="text" placeholder="Enter City Name" spellcheck="false">
+        <button><img src="./Image/search.jpg" alt=""></button>
+    </div>
+
+    <div class="weather">
+        <img src="./Image/rain.png" alt="c" class="weatherIcon">
+        <h1 class="temp">-6°</h1>
+        <h2 class="city">Helsinki</h2>
+        <div class="details">
+            <div class="col">
+                <img src="./Image/humidity.png">
+                <div>
+                    <p class="humidity">50%</p>
+                    <p> Humidity</p>
+                </div>
+            </div>
+            <div class="col">
+                <img src="./Image/wind.png">
+                <div>
+                    <p class="wind">30 kmph</p>
+                    <p> Wind Speed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const apiKey="1962f45400b2dcda9992228a1978be99";
+    const apiUrl="https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+
+    const searchBox=document.querySelector(".search input");
+    const searchBtn=document.querySelector(".search button");
+
+    async function checkData(city){
+            const response= await fetch(apiUrl+ city+ `&appid=${apiKey}`);
+            var data= await response.json();
+
+            console.log(data);
+
+            document.querySelector(".city").innerHTML=data.name;
+            document.querySelector(".temp").innerHTML=Math.round(data.main.temp)+"°C";
+            document.querySelector(".humidity").innerHTML=data.main.humidity+"%";
+            document.querySelector(".wind").innerHTML=data.wind.speed+"kmph";
+
+    }
+
+    searchBtn.addEventListener("click", ()=>{
+        checkData(searchBox.value);
+    })
+</script>
+
+</body>
+</html>
