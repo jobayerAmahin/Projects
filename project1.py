@@ -25,4 +25,4 @@ else:
     print('Incorrect!')
 
 print('You got'+ str(score)+'quiestions correct')
-print('You got'+str((score/4)*100)+'percent %')
+print('You got'+str((score/4)*100)+'percentage %')
